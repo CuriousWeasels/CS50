@@ -1,0 +1,50 @@
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    long input = get_long("Please enter your credit card number: ");
+
+    //Checking digits in input
+    int num_digit = input;
+    int digits = 1;
+
+    while (num_digit >= 10)
+    {
+        num_digit /= 10;
+        digits = digits + 1;
+    }
+
+
+    printf("%i\n", digits);
+    //Conditional Checks for card type
+    long first_digit = input;
+    while (first_digit >= 10)
+    {
+        first_digit /= 10;
+    }
+
+    long two_digit = input;
+    while (two_digit >= 100)
+    {
+        two_digit /= 10;
+    }
+
+    if (first_digit == 4 && (digits == 13 || digits == 16))
+    {
+        printf("VISA\n");
+    }
+    else if ((two_digit == 51 || two_digit == 52 || two_digit == 53 || two_digit == 54 || two_digit == 55) && (digits == 16))
+    {
+        printf("MASTERCARD\n");
+    }
+    else if((two_digit == 34 || two_digit == 37) && (digits == 15))
+    {
+        printf("AMEX\n");
+    }
+    else
+    {
+        printf("INVALID\n");
+    }
+
+}
