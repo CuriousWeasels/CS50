@@ -6,8 +6,8 @@ int main(void)
     long input = get_long("Please enter your credit card number: ");
 
     //Checking digits in input
-    int num_digit = input;
-    int digits = 1;
+    long num_digit = input;
+    long digits = 1;
 
     while (num_digit >= 10)
     {
@@ -15,8 +15,6 @@ int main(void)
         digits = digits + 1;
     }
 
-
-    printf("%i\n", digits);
     //Conditional Checks for card type
     long first_digit = input;
     while (first_digit >= 10)
