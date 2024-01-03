@@ -1,0 +1,101 @@
+#include <cs50.h>
+#include <ctype.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int word_check(string plain_text);
+int main(int argc, string argv[])
+{
+    int length = strlen(argv[1]);
+
+    for (int i = 0, x = i + 1; i < length; i++)
+    {
+        if (argc > 2)
+        {
+            printf("Error. Extra command-line Argument.\n");
+            return 1;
+            exit(0);
+        }
+        else if ((isalpha(argv[x][i])) == false || length > 26)
+        {
+            printf("Error. Invalid Characters.\n");
+            return 1;
+            exit(0);
+        }
+        else if (i > 25)
+        {
+            printf("Error. Invalid Characters.\n");
+            return 1;
+            exit(0);
+        }
+        else if (word_check(argv[1]) == 1)
+        {
+            return 1;
+            exit(0);
+        }
+    }
+
+    string upper_input = argv[1];
+
+    for (int i = 0; upper_input[i] != '\0'; i++)
+    {
+        if (isupper(upper_input[i]))
+        {
+            continue;
+        }
+        else if (islower(upper_input[i]))
+        {
+            upper_input[i] = toupper(upper_input[i]);
+        }
+    }
+
+    string plaintext = get_string("Plaintext: ");
+    int strlength = strlen(plaintext) + 1;
+    char ptext[strlength];
+    int holder;
+    for (int i = 0; i < strlen(plaintext); i++)
+    {
+        if (isupper(plaintext[i]))
+        {
+            holder = plaintext[i] - 'A';
+            ptext[i] = toupper(upper_input[holder]);
+        }
+        else if (islower(plaintext[i]))
+        {
+            holder = plaintext[i] - 'a';
+            ptext[i] = tolower(upper_input[holder]);
+        }
+        else
+        {
+            ptext[i] = plaintext[i];
+        }
+    }
+    ptext[strlength] = '\0';
+    printf("ciphertext: %s\n", ptext);
+}
+
+int word_check(string plain_text)
+{
+    char letter;
+    for (int i = 0; i < 26; i++)
+    {
+        letter = plain_text[i];
+
+        for (int x = 0; x < 26; x++)
+        {
+            if (x == i)
+            {
+                continue;
+            }
+            else if (letter == plain_text[x])
+            {
+                // printf("Error. Repeated Characters. %i\n",(x+1));
+                return 1;
+                exit(0);
+            }
+        }
+    }
+    return 2;
+}
